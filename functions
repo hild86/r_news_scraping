@@ -1,3 +1,5 @@
+#' these are all the requirements
+
 library(rvest)
 library(magrittr)
 library(qdapDictionaries)
@@ -6,6 +8,9 @@ library(wordcloud)
 library(tm)
 library(tidytext)
 library(dplyr)
+
+
+#' let's start with google news. multiple words need to be separated by "+"
 
 google_sentiment <- function(goomer, lang = "en", page="0") {
 
@@ -38,6 +43,7 @@ google_sentiment <- function(goomer, lang = "en", page="0") {
   
 }
 
+#'Bloomberg: note that even if you separate multiples words by "+" it doesn't always works
 
 bloom_sentiment <- function(bloomer) {
 
@@ -90,6 +96,8 @@ bloom_sentiment <- function(bloomer) {
       sum(all[which(all$sentiment == "negative"),]$FREQ), "frequency" = frequency))
     
 }
+
+#' reuters - this should work
 
 
 reut_sentiment <- function(reutoor) {
