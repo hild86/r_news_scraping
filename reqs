@@ -1,0 +1,10 @@
+#' these are all the dependencies
+
+library(rvest)
+library(magrittr)
+library(qdapDictionaries)
+library(qdap)
+library(wordcloud)
+library(tm)
+library(tidytext)
+library(dplyr)
