@@ -3,7 +3,7 @@
 This project is a small attempt to build a sentiment index by scraping some of the most common news sources available on the internet today in such a way that a sentiment index can be easily built.
 All of this cannot be done if I wasn't using packages that many developers spent time and effort producing. This is just a quick and dirty solution compared to other packages.
 
-Essentially there are three scrapers:
+There are three scrapers:
 
 1. Google News
   The function google_sentiment() basically goes on google news and scraps the main articles titles and articles pre-ambles. Then it cleans up the articles and count the words used eliminating the most used words.
