@@ -1,0 +1,52 @@
+#' reuters - this should work
+
+
+reut_sentiment <- function(reutoor) {
+
+  url <- paste( "http://www.reuters.com/search/news?blob=", reutoor, sep="")
+  
+  reut <- read_html(url) %>%
+    html_nodes("a") %>%
+    html_attr('href')
+  
+  reut.news <- reut[grepl("/article/" ,reut)] %>%
+    unique()
+  
+  reut.news.refined <- paste("http://www.reuters.com",reut.news, sep = "" )
+  
+  corpus.bloom.list <- list()
+
+  try(  
+  for (item in 1:length(reut.news.refined)) {
+    link <- reut.news.refined[item]
+    corpus.bloom.list[[item]] <- read_html(link) %>%
+      html_nodes("p") %>%
+      html_text()
+  }
+  )
+  
+  corpus.reut <- unlist(corpus.bloom.list)
+  
+  corpus.bloom.clean  <- corpus.reut %>%
+    # as.data.frame() %>%
+    tolower() %>%
+    removePunctuation() %>%
+    removeNumbers() %>%
+    stripWhitespace() %>%
+    replace_contraction() %>%
+    replace_abbreviation() %>%
+    replace_symbol()
+  
+  frequency <- freq_terms(corpus.bloom.clean, top =10, at.least =1, 
+                          stopwords=myStopWords)
+  word.list <- word_list(corpus.bloom.clean)
+  all <- left_join(word.list$fswl$all, pos.words.revised, by = c("WORD"="word"))
+  
+  
+  #  wordcloud(frequency$WORD, frequency$FREQ, colors=brewer.pal(8, "Dark2"))
+  plot(frequency)
+  return(
+    list("sentiment_index" = sum(all[which(all$sentiment == "positive"),]$FREQ) / 
+           sum(all[which(all$sentiment == "negative"),]$FREQ), "frequency" = frequency))
+  
+}
