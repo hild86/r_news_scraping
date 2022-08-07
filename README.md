@@ -1,4 +1,4 @@
-# news_scraping using R
+# NEED UPDATE news_scraping using R
 
 This project is a small attempt to build a sentiment index by scraping some of the most common news sources available on the internet today in such a way that a sentiment index can be easily built.
 All of this cannot be done if I wasn't using packages that many developers spent time and effort producing. This is just a quick and dirty solution compared to other packages.
